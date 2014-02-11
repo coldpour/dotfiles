@@ -1,4 +1,6 @@
-export EDITOR="/usr/local/bin/emacs -nw"
+export _EMACS_PATH='/Applications/Emacs.app/Contents/MacOS'
+export _EMACS_CMD="${_EMACS_PATH}/bin/emacsclient --alternate-editor ${_EMACS_PATH}/Emacs"
+export EDITOR="${_EMACS_CMD} -nw"
 export CATALINA_HOME="/Users/mholm/apache-tomcat-5.5.33"
 export MAVEN_HOME="/Users/mholm/apache-maven-3.1.0"
 export M2_HOME=$MAVEN_HOME
@@ -13,9 +15,10 @@ if [ -z $SYSTEM_PATH ]; then
 fi
 export PATH="$SYSTEM_PATH:$GRAILS_HOME/bin:$MAVEN_HOME/bin:/Users/mholm/devtools/bin:."
 
-alias emacs='emacs -nw'
-alias aqua='aquamacs'
-alias aalias="emacs ~/.bash_profile"
+alias emacsclient="${_EMACS_CMD} --no-wait"
+alias emacs='emacsclient'
+alias ec='emacs'
+alias aalias="ec ~/.bash_profile"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -53,7 +56,7 @@ mkdircp () { mkdir ${2}; cp -r ${1} ${2}; }
 
 removeTemps () { rm -i ${1}/*~; }
 
-reload () { 
+reload () {
     . /Users/mholm/.bash_profile
 }
 
@@ -104,8 +107,8 @@ export COLOR_LIGHT_GRAY='\[\033[0;37m\]'
 
 # Completion -------------------------------------------------------
 
-# Turn on advanced bash completion if the file exists 
-# Get it here: http://www.caliban.org/bash/index.shtml#completion or 
+# Turn on advanced bash completion if the file exists
+# Get it here: http://www.caliban.org/bash/index.shtml#completion or
 # on OSX: sudo port install bash-completion
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
@@ -120,9 +123,9 @@ source ~/workspace/dotfiles/matthoffman/bin/git-completion.bash
 source ~/workspace/dotfiles/matthoffman/bin/svn-completion.bash
 
 # Add completion to source and .
-complete -F _command source 
+complete -F _command source
 complete -F _command .
-    
+
 # Prompts ----------------------------------------------------------
 
 export GIT_PS1_SHOWDIRTYSTATE=true
@@ -131,7 +134,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 prompt_func() {
     previous_return_value=$?;
     prompt="${COLOR_GREEN}[\A]${COLOR_NC}\w$(__git_ps1)$(__svn_ps1)"
-    
+
     if test $previous_return_value -eq 0; then  # helpful indicator of failing processes
         PS1="${prompt}$ "
     else
