@@ -1,7 +1,0 @@
-[user]
-	email = mholm815@gmail.com
-	name = Mike Holm
-[push]
-	default = upstream
-[core]
-	editor = emacs -nw
