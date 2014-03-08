@@ -48,6 +48,7 @@ alias emasc='emacs'
 alias it='git'
 alias ij='open -a /Applications/IntelliJ\ IDEA\ 12.app/'
 alias idea='ij'
+alias sshspgc='ssh saintpa8@just76.justhost.com'
 
 cdls () { cd $1; ls; }
 
