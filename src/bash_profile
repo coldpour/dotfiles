@@ -1,3 +1,9 @@
+# on OSX, this is the file the Terminal app reads first
+# on Ubuntu, bash reads .bashrc for non-login, interactive shells
+# on Ubuntu, bash reads .bash_profile for login, interactive shells
+# so I need to figure out some logic so that both architectures go through the right path
+# and gives me a consistent environment
+
 export _EMACS_PATH='/Applications/Emacs.app/Contents/MacOS'
 export _EMACS_CMD="${_EMACS_PATH}/bin/emacsclient --alternate-editor ${_EMACS_PATH}/Emacs"
 export EDITOR="${_EMACS_CMD} -nw"
