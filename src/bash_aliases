@@ -17,7 +17,6 @@ alias fix-maven='fix-mvn'
 alias grep='grep --color -n'
 alias ij='open -a /Applications/IntelliJ\ IDEA\ 12.app/'
 alias idea='ij'
-alias it='git'
 alias la='ls -A'
 alias ll='ls -lh'
 alias lla='ll -A'
@@ -37,6 +36,10 @@ alias sha='shasum -a 256'
 alias -- +='more'
 alias -- -='less'
 alias sshspgc='ssh saintpa8@just76.justhost.com'
+
+### git ###
+alias it='git'
+alias gs='git status'
 
 cdls () { cd $1; ls; }
 
