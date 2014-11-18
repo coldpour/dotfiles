@@ -13,82 +13,6 @@ export GIT_HOME="/usr/local/git"
 if [ -z $SYSTEM_PATH ]; then
   export SYSTEM_PATH=$PATH
 fi
-export PATH="$SYSTEM_PATH:$GRAILS_HOME/bin:$MAVEN_HOME/bin:/Users/mholm/devtools/bin:."
-
-alias emacsclient="${_EMACS_CMD} --no-wait"
-alias emacs='emacsclient'
-alias ec='emacs'
-alias aalias="ec ~/.bash_profile"
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias cd..='cd ..'
-alias cd...='cd ../..'
-alias snv='svn'
-alias ls='ls -GFh'
-alias la='ls -A'
-alias ll='ls -lP'
-alias lla='ll -A'
-alias cls='clear'
-alias mdcd='mkdircd'
-alias mkcd='mkdircd'
-alias mkdcd='mkdircd'
-alias mdcp='mkdircp'
-alias mkcp='mkdircp'
-alias mkdcp='mkdircp'
-alias clean='removeTemps'
-alias rm~='removeTemps'
-alias cl='cdls'
-alias sha='shasum -a 256'
-alias fix-maven='fix-mvn'
-alias tiga='tig --all'
-alias grep='grep --color -n'
-alias sn='serverName.sh'
-alias emasc='emacs'
-alias emcas='emacs'
-alias it='git'
-alias ij='open -a /Applications/IntelliJ\ IDEA\ 12.app/'
-alias idea='ij'
-alias -- +='more'
-alias -- -='less'
-alias sshspgc='ssh saintpa8@just76.justhost.com'
-
-cdls () { cd $1; ls; }
-
-mkdircd () { mkdir ${1}; cd ${1}; }
-mkdircp () { mkdir ${2}; cp -r ${1} ${2}; }
-
-removeTemps () { rm -i ${1}/*~; }
-
-reload () {
-    . /Users/mholm/.bash_profile
-}
-
-fix-mvn () {
-    ll /usr/share/maven
-    sudo rm /usr/share/maven
-    sudo ln -s $MAVEN_HOME /usr/share/maven
-    ll /usr/share/maven
-}
-
-svnurl () {
-    pattern=URL:
-    line=`svn info $1 | grep $pattern`
-    echo ${line#${pattern}}
-}
-
-about () {
-    # validate input won't set a new alias
-    if [[ $1 =~ '.*=.*' ]]; then
-	echo "$1 is not an executable or alias"
-	exit 1
-    fi
-
-    # print info about the argument
-    which $1
-    if [ "$?" -ne "0" ]; then echo "-about: $1: not found in PATH"; fi
-    alias $1
-}
 
 # Setup some colors to use later in interactive shell or scripts
 export COLOR_NC='\[\033[0m\]' # No Color
@@ -121,15 +45,6 @@ if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 fi
 
-# git completion
-source ~/workspace/dotfiles/matthoffman/bin/git-completion.bash
-# ...and svn completion
-source ~/workspace/dotfiles/matthoffman/bin/svn-completion.bash
-
-# Add completion to source and .
-complete -F _command source
-complete -F _command .
-
 # Prompts ----------------------------------------------------------
 
 export GIT_PS1_SHOWDIRTYSTATE=true
@@ -137,7 +52,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 
 prompt_func() {
     previous_return_value=$?;
-    prompt="${COLOR_GREEN}[\A]${COLOR_NC}\w$(__git_ps1)$(__svn_ps1)"
+    prompt="${COLOR_GREEN}[\A]${COLOR_NC}\w$(__git_ps1)"
 
     if test $previous_return_value -eq 0; then  # helpful indicator of failing processes
         PS1="${prompt}$ "

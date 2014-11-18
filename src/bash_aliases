@@ -1,7 +1,10 @@
+alias emacsclient="${_EMACS_CMD} --no-wait"
+alias emacs='emacsclient'
+alias ec='emacs'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias aalias='emacs ~/.bash_profile'
+alias aalias='emacs ~/.bash_aliases'
 alias aqua='aquamacs'
 alias cd..='cd ..'
 alias cd...='cd ../..'
@@ -12,11 +15,11 @@ alias emacs='emacs -nw'
 alias emasc='emacs'
 alias fix-maven='fix-mvn'
 alias grep='grep --color -n'
-alias idea='ij'
 alias ij='open -a /Applications/IntelliJ\ IDEA\ 12.app/'
+alias idea='ij'
 alias it='git'
 alias la='ls -A'
-alias ll='ls -lP'
+alias ll='ls -lh'
 alias lla='ll -A'
 alias ls='ls -GFh'
 alias mdcd='mkdircd'
@@ -29,6 +32,47 @@ alias rm~='removeTemps'
 alias sha='shasum -a 256'
 alias sn='serverName.sh'
 alias snv='svn'
-alias sshq='ssh -p 22222 quantum@localhost'
 alias tiga='tig --all'
+alias sha='shasum -a 256'
+alias -- +='more'
+alias -- -='less'
+alias sshspgc='ssh saintpa8@just76.justhost.com'
 
+cdls () { cd $1; ls; }
+
+mkdircd () { mkdir ${1}; cd ${1}; }
+mkdircp () { mkdir ${2}; cp -r ${1} ${2}; }
+
+removeTemps () { rm -i ${1}/*~; }
+
+reload () {
+    . /Users/mholm/.bashrc
+    . /Users/mholm/.bash_profile
+    . /Users/mholm/.bash_aliases
+}
+
+fix-mvn () {
+    ll /usr/share/maven
+    sudo rm /usr/share/maven
+    sudo ln -s $MAVEN_HOME /usr/share/maven
+    ll /usr/share/maven
+}
+
+svnurl () {
+    pattern=URL:
+    line=`svn info $1 | grep $pattern`
+    echo ${line#${pattern}}
+}
+
+about () {
+    # validate input won't set a new alias
+    if [[ $1 =~ '.*=.*' ]]; then
+	echo "$1 is not an executable or alias"
+	exit 1
+    fi
+
+    # print info about the argument
+    which $1
+    if [ "$?" -ne "0" ]; then echo "-about: $1: not found in PATH"; fi
+    alias $1
+}
