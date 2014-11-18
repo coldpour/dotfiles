@@ -1,52 +1,97 @@
-alias emacsclient="${_EMACS_CMD} --no-wait"
-alias emacs='emacsclient'
-alias ec='emacs'
+####################
+### fs shortcuts ###
+####################
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias aalias='emacs ~/.bash_aliases'
-alias aqua='aquamacs'
-alias cd..='cd ..'
-alias cd...='cd ../..'
-alias cl='cdls'
-alias clean='removeTemps'
-alias cls='clear'
-alias emacs='emacs -nw'
-alias emasc='emacs'
-alias fix-maven='fix-mvn'
-alias grep='grep --color -n'
-alias ij='open -a /Applications/IntelliJ\ IDEA\ 12.app/'
-alias idea='ij'
 alias la='ls -A'
 alias ll='ls -lh'
 alias lla='ll -A'
 alias ls='ls -GFh'
-alias mdcd='mkdircd'
-alias mdcp='mkdircp'
-alias mkcd='mkdircd'
-alias mkcp='mkdircp'
-alias mkdcd='mkdircd'
-alias mkdcp='mkdircp'
-alias rm~='removeTemps'
-alias sha='shasum -a 256'
-alias sn='serverName.sh'
-alias snv='svn'
-alias tiga='tig --all'
-alias sha='shasum -a 256'
+alias grep='grep --color -n'
 alias -- +='more'
 alias -- -='less'
-alias sshspgc='ssh saintpa8@just76.justhost.com'
-
-### git ###
-alias it='git'
-alias gs='git status'
+alias cls='clear'
+alias sha='shasum -a 256'
 
 cdls () { cd $1; ls; }
+alias cl='cdls'
 
 mkdircd () { mkdir ${1}; cd ${1}; }
+alias mdcd='mkdircd'
+alias mkcd='mkdircd'
+alias mkdcd='mkdircd'
+
 mkdircp () { mkdir ${2}; cp -r ${1} ${2}; }
+alias mdcp='mkdircp'
+alias mkcp='mkdircp'
+alias mkdcp='mkdircp'
+
+#############
+### emacs ###
+#############
+
+alias emacsclient="${_EMACS_CMD} --no-wait"
+alias emacs='emacsclient'
+alias ec='emacs'
+alias emacs='emacs -nw'
+alias emasc='emacs'
+
+alias aqua='aquamacs'
+
+################
+### IntelliJ ### need to detect IntelliJ
+################
+
+alias ij='open -a /Applications/IntelliJ\ IDEA\ 12.app/'
+alias idea='ij'
+
+###########
+### git ###
+###########
+
+git config --global alias.br "branch"
+git config --global alias.co "checkout"
+git config --global alias.ci "commit"
+git config --global alias.d "diff"
+git config --global alias.dc "diff --cached"
+git config --global alias.st "status"
+git config --global alias.la "config --get-regexp alias"
+git config --global push.default "simple"
+
+__log_cmd__="log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
+
+git config --global alias.lg "$__log_cmd__"
+git config --global alias.lga "${__log_cmd__} --all"
+
+alias lg="git ${__log_cmd__}"
+alias lga="git ${__log_cmd__} --all"
+alias it='git'
+alias gs='git status'
+alias gd='git diff'
+alias gcm='git checkout master'
+
+alias tiga='tig --all'
+
+###########
+### svn ###
+###########
+
+alias snv='svn'
+svnurl () {
+    pattern=URL:
+    line=`svn info $1 | grep $pattern`
+    echo ${line#${pattern}}
+}
+
+#######################
+### rando functions ###
+#######################
 
 removeTemps () { rm -i ${1}/*~; }
+alias clean='removeTemps'
+alias rm~='removeTemps'
 
 refresh () {
     . ~/.bashrc
@@ -60,12 +105,7 @@ fix-mvn () {
     sudo ln -s $MAVEN_HOME /usr/share/maven
     ll /usr/share/maven
 }
-
-svnurl () {
-    pattern=URL:
-    line=`svn info $1 | grep $pattern`
-    echo ${line#${pattern}}
-}
+alias fix-maven='fix-mvn'
 
 about () {
     # validate input won't set a new alias
@@ -79,3 +119,15 @@ about () {
     if [ "$?" -ne "0" ]; then echo "-about: $1: not found in PATH"; fi
     alias $1
 }
+
+#############################
+### get back here quickly ###
+#############################
+
+alias aalias='emacs ~/.bash_aliases'
+
+###########
+### ssh ###
+###########
+
+alias sshspgc='ssh saintpa8@just76.justhost.com'
