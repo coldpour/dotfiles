@@ -1,0 +1,17 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+createSymlink() {
+    if [ "$2" ]; then
+        rm "$2"
+    fi
+    ln -s "$1" "$2"
+    echo "Created symlink to $1"
+}
+
+createEmacsSymlink() {
+    createSymlink $DIR/src/.spacemacs ~/.spacemacs
+}
+
+createEmacsSymlink
