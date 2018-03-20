@@ -1,3 +1,0 @@
-[submodule "src/emacs.d"]
-	path = src/emacs.d
-	url = https://github.com/mikeholm/emacs-live
