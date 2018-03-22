@@ -61,7 +61,9 @@ This function should only modify configuration layer settings."
      neotree
      org
      osx
-     react
+     (react :variables
+            node-add-modules-path t
+            )
      search-engine
      spell-checking
      syntax-checking
@@ -461,6 +463,10 @@ before packages are loaded."
   (spaceline-define-segment datetime
     (shell-command-to-string "echo -n $(date '+%a %d %b %I:%M%p')"))
   (spaceline-spacemacs-theme 'datetime)
+
+  ;; use react-mode for .js files
+  ;; depends on the react layer
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
