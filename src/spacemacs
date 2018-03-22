@@ -48,11 +48,11 @@ This function should only modify configuration layer settings."
           elm-sort-imports-on-save t
           elm-format-on-save t)
      emacs-lisp
+     eslint-fix
      fasd
      git
      (javascript :variables
                  node-add-modules-path t
-                 javascript-eslint-fix-on-save t
                  web-beautify-args '("--indent-size" "2"
                                      "-f" "-"))
      (markdown :variables
