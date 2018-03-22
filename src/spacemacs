@@ -50,6 +50,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      eslint-fix
      fasd
+     flow-type
      git
      (javascript :variables
                  node-add-modules-path t
