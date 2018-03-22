@@ -454,6 +454,13 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  (spacemacs/toggle-mode-line-battery-on)
+
+  ;; add date and time to modeline
+  (spaceline-define-segment datetime
+    (shell-command-to-string "echo -n $(date '+%a %d %b %I:%M%p')"))
+  (spaceline-spacemacs-theme 'datetime)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
