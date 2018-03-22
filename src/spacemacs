@@ -39,19 +39,15 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
      auto-completion
      better-defaults
-     (coldpour :variables
-               coldpour/capture-file "~/projects/mineral-ui-research/notes.md")
      (elm :variables
           elm-sort-imports-on-save t
           elm-format-on-save t)
      emacs-lisp
-     eslint-fix
      fasd
-     flow-type
      git
+     helm
      (javascript :variables
                  node-add-modules-path t
                  web-beautify-args '("--indent-size" "2"
@@ -69,6 +65,12 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      version-control
+
+     ;; custom layers
+     (coldpour :variables
+               coldpour/capture-file "~/projects/mineral-ui-research/notes.md")
+     eslint-fix
+     flow-type
      )
 
    ;; List of additional packages that will be installed without being
