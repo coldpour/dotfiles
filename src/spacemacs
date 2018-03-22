@@ -470,18 +470,18 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
   (global-centered-cursor-mode)
-  (spacemacs/toggle-mode-line-battery-on)
 
-  ;; add date and time to modeline
+  ;; customize the modeline
   (spaceline-define-segment datetime
     (shell-command-to-string "echo -n $(date '+%a %d %b %I:%M%p')"))
   (spaceline-spacemacs-theme 'datetime)
+  (spacemacs/toggle-mode-line-battery-on)
 
   ;; use react-mode for .js files
   ;; depends on the react layer
   (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
 
-
+  ;; end of user-config
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
