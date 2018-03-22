@@ -51,7 +51,16 @@ This function should only modify configuration layer settings."
      (javascript :variables
                  node-add-modules-path t
                  web-beautify-args '("--indent-size" "2"
-                                     "-f" "-"))
+                                     "-f" "-")
+                 js-indent-level 2
+                 js2-basic-offset 2
+                 json-reformat:indent-width 2
+                 css-indent-offset 2
+                 web-mode-attr-indent-offset 2
+                 web-mode-code-indent-offset 2
+                 web-mode-css-indent-offset 2
+                 web-mode-markup-indent-offset 2
+                 )
      (markdown :variables
                markdown-list-indent-width 2
                markdown-live-preview-engine 'vmd)
@@ -460,6 +469,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  (global-centered-cursor-mode)
   (spacemacs/toggle-mode-line-battery-on)
 
   ;; add date and time to modeline
@@ -470,6 +480,8 @@ before packages are loaded."
   ;; use react-mode for .js files
   ;; depends on the react layer
   (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
+
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
